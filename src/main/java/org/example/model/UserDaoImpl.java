@@ -1,5 +1,8 @@
 package org.example.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import org.example.DB.DBConnection;
 
 import javax.sql.RowSet;
@@ -135,6 +138,57 @@ public class UserDaoImpl implements UserDao {
         }
         return friends;
     }
+
+    @Override
+    public ObservableList<PieChart.Data> getUsersByGender() {
+        int females =0;
+        int males = 0;
+        ResultSet resultSet ;
+        ObservableList<PieChart.Data> genderData = FXCollections.observableArrayList();
+        String femaleSql = "select count(gender) from contacts where gender ="+ Gender.Female+")";
+        String maleSql = "select count(gender) from contacts where gender ="+ Gender.Male+")";
+        try {
+            resultSet  = statement.executeQuery(femaleSql);
+            females = resultSet.getInt(1);
+            resultSet  = statement.executeQuery(maleSql);
+            males = resultSet.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        PieChart.Data malesData = new PieChart.Data("Males",males);
+        PieChart.Data feMalesData = new PieChart.Data("Females",females);
+        genderData.addAll(malesData,feMalesData);
+        return genderData;
+    }
+
+    @Override
+    public ObservableList<PieChart.Data> getUsersByCountry() {
+        return null;
+        // need to ask for number of countries and what are they ?
+    }
+
+    @Override
+    public ObservableList<PieChart.Data> getUsersByStatus() {
+        int online =0;
+        int offline = 0;
+        ResultSet resultSet ;
+        ObservableList<PieChart.Data> statusData = FXCollections.observableArrayList();
+        String onlineSql = "select count(status) from contacts where status ="+ UserStatus.ONLINE+")";
+        String offlineSql = "select count(status) from contacts where status <>"+ UserStatus.ONLINE+")";
+        try {
+            resultSet  = statement.executeQuery(onlineSql);
+            online = resultSet.getInt(1);
+            resultSet  = statement.executeQuery(offlineSql);
+            offline = resultSet.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        PieChart.Data onlineData = new PieChart.Data("ONline",online);
+        PieChart.Data offlineData = new PieChart.Data("OFFline",offline);
+        statusData.addAll(onlineData,offlineData);
+        return statusData;
+    }
+
     private User extractUser(ResultSet resultSet){
         try{
             User user = new User();

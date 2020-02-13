@@ -4,6 +4,7 @@ module org.example {
     requires java.sql;
     requires mysql.connector.java;
     requires java.naming;
+    requires org.controlsfx.controls ;
     requires org.kordamp.ikonli.javafx;
     requires java.rmi;
     opens org.example to javafx.fxml;

@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="MavenFX" />
         <module name="Chat_App_ITI_Server" />
+        <module name="Chat_Server" />
         <module name="Chat_App_ITI" />
       </profile>
     </annotationProcessing>

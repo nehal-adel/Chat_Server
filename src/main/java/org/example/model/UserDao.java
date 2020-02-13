@@ -1,5 +1,8 @@
 package org.example.model;
 
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
+
 import java.util.List;
 
 public interface UserDao {
@@ -14,5 +17,12 @@ public interface UserDao {
     boolean addUser(User user);
 
     List<User> getFriendList(User user);
+
+    ObservableList<PieChart.Data> getUsersByGender();
+
+    ObservableList<PieChart.Data> getUsersByCountry();
+
+    ObservableList<PieChart.Data> getUsersByStatus();
+
 
 }
