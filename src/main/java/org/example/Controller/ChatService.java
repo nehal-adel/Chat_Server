@@ -60,7 +60,6 @@ public class ChatService extends UnicastRemoteObject implements IChatService {
     @Override
     public void unRegister(int userId)
     {
-        onlineUsers.remove(user);
         IUserService removedUser = onlineUsers.remove(userId);
         if(removedUser == null){ // Check User In Map
             System.out.println("Not Founed To Remove");
@@ -69,7 +68,6 @@ public class ChatService extends UnicastRemoteObject implements IChatService {
 
     @Override
     public void addFriend() {
-
     }
 
     @Override
